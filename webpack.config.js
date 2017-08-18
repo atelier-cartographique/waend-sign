@@ -21,12 +21,23 @@ module.exports = {
     },
 
     resolve: {
-        // mainFields: ['browser', 'main'],
+        mainFields: ['browser', 'main'],
         extensions: ['.ts', '.js']
     },
 
     module: {
         rules: [
+            {
+                enforce: 'pre',
+                test: /\.js$/,
+                loader: "source-map-loader"
+            },
+
+            {
+                enforce: 'pre',
+                test: /\.ts$/,
+                use: "source-map-loader"
+            },
             {
                 test: /\.ts$/,
                 loaders: [
@@ -79,17 +90,9 @@ module.exports = {
 
     plugins: [
         new ExtractTextPlugin("[name].css"),
-        new UglifyJSPlugin({
-            parallel: true,
-            uglifyOptions: {
-                ie8: false,
-                ecma: 6,
-                compress: {
-
-                }
-            }
-        }),
     ],
+
+    devtool: 'inline-source-map',
 };
 
 

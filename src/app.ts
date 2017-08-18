@@ -4,18 +4,27 @@ import { render } from 'react-dom';
 import { IShape } from './shape';
 import { IStoreInteractions } from './source';
 import { DIV } from './components/elements';
+import { getBinder } from "waend-shell/defs";
+import events from './events/app';
+import queries from './queries/app';
+import header from './components/header';
+import login from './components/login';
 
 
 const logger = debug('waend:app');
 
 
-
+const renderLogin = () => login();
+const renderUser = () => (
+    DIV({ className: 'viewport' },
+        header(),
+        DIV({ className: 'content' })));
 
 const renderMain = (): React.DOMElement<{}, Element> => {
-
-    return DIV({},
-        DIV({ className: `main ${name}` }),
-    );
+    switch (queries.getLayout()) {
+        case 'main': return renderUser();
+        case 'login': return renderLogin();
+    }
 };
 
 const MIN_FRAME_RATE = 16;
@@ -65,6 +74,14 @@ export default (store: IStoreInteractions<IShape>) => {
 
     const start = () => {
         requestAnimationFrame(updateState);
+        getBinder()
+            .getMe()
+            .then((user) => {
+                events.setUser(user);
+            })
+            .catch(() => {
+                events.setLayout('login');
+            });
     };
 
     return { start };

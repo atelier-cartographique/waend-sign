@@ -15,7 +15,7 @@
         "noUnusedParameters": true,
         "strictNullChecks": true,
         "removeComments": true,
-        "sourceMap": false
+        "sourceMap": true
     },
     "include": [
         "src/index.ts"
