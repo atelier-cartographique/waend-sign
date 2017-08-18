@@ -3,11 +3,10 @@ import * as debug from 'debug';
 import { render } from 'react-dom';
 import { IShape } from './shape';
 import { IStoreInteractions } from './source';
-import { DIV } from './components/elements';
 import { getBinder } from "waend-shell/defs";
 import events from './events/app';
 import queries from './queries/app';
-import header from './components/header';
+import user from './components/user';
 import login from './components/login';
 
 
@@ -15,10 +14,7 @@ const logger = debug('waend:app');
 
 
 const renderLogin = () => login();
-const renderUser = () => (
-    DIV({ className: 'viewport' },
-        header(),
-        DIV({ className: 'content' })));
+const renderUser = () => user();
 
 const renderMain = (): React.DOMElement<{}, Element> => {
     switch (queries.getLayout()) {

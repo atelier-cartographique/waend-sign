@@ -1,6 +1,6 @@
 
 
-import { User } from 'waend-lib';
+import { User, Group } from 'waend-lib';
 import { LoginState, defaultLoginState } from '../components/login';
 
 export type AppLayout =
@@ -26,6 +26,7 @@ export interface IShapeApp {
 
 export interface IShapeData {
     'data/user': User | null;
+    'data/groups': Group[];
 }
 
 export type IShape = IShapeApp & IShapeData;
