@@ -11,6 +11,10 @@ const queries = {
         return query('component/login').password;
     },
 
+    getMode() {
+        return query('component/login').mode;
+    },
+
 };
 
 export default queries;

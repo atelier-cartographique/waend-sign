@@ -4,21 +4,59 @@ import events from '../../events/login';
 import { DIV, INPUT, BUTTON } from '../elements';
 
 
+export type Mode = 'login' | 'register';
+
 export interface LoginState {
+    mode: Mode;
     username: string;
     password: string;
 }
 
 export const defaultLoginState =
     (): LoginState => ({
+        mode: 'login',
         username: '',
         password: '',
     });
 
 
+const opposite =
+    (m: Mode): Mode => {
+        switch (m) {
+            case 'login': return 'register';
+            case 'register': return 'login';
+        }
+    }
+
+const toggleMode =
+    () => events.setMode(opposite(queries.getMode()));
+
+const handler =
+    (m: Mode) => () => {
+        const un = queries.getUsername();
+        const pw = queries.getPassword();
+        switch (m) {
+            case 'login':
+                events.login(un, pw);
+                break;
+            case 'register':
+                events.register(un, pw);
+                break;
+        }
+    };
+
+const label =
+    (m: Mode) => {
+        switch (m) {
+            case 'login': return 'Login';
+            case 'register': return 'Register';
+        }
+    };
+
 const render =
     () => (
         DIV({ className: 'login' },
+            DIV({ onClick: toggleMode }, `switch to ${label(opposite(queries.getMode()))}`),
             DIV({}, 'username', INPUT({
                 type: 'text',
                 onChange(e) {
@@ -32,12 +70,8 @@ const render =
                 },
             })),
             DIV({}, BUTTON({
-                onClick() {
-                    const un = queries.getUsername();
-                    const pw = queries.getPassword();
-                    events.login(un, pw);
-                },
-            }, 'login')))
+                onClick: handler(queries.getMode()),
+            }, label(queries.getMode()))))
     );
 
 export default render;
