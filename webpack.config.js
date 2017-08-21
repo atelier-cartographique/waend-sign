@@ -10,7 +10,7 @@ module.exports = {
     context: ROOT,
     entry: {
         bundle: './src/index.ts',
-        style: './style/index.js',
+        style: './src/style.js',
     },
 
     output: {

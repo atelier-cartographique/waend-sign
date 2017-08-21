@@ -57,14 +57,16 @@ const render =
     () => (
         DIV({ className: 'login' },
             DIV({ onClick: toggleMode }, `switch to ${label(opposite(queries.getMode()))}`),
-            DIV({}, 'username', INPUT({
+            DIV({}, INPUT({
                 type: 'text',
+                placeholder: 'username',
                 onChange(e) {
                     events.updateName(e.target.value);
                 },
             })),
-            DIV({}, 'password', INPUT({
+            DIV({}, INPUT({
                 type: 'password',
+                placeholder: 'password',
                 onChange(e) {
                     events.updatePassword(e.target.value);
                 },

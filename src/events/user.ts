@@ -16,6 +16,19 @@ const events = {
                 dispatch('data/groups', () => groups);
             });
     },
+
+    setUserValue(key: string, val: string) {
+        dispatch('data/user', (u) => {
+            if (u) {
+                getBinder()
+                    .update(u, key, val)
+                    .then(() => {
+                        dispatch('data/user', u => u);
+                    });
+            }
+            return u;
+        });
+    },
 };
 
 export default events;
