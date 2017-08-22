@@ -8,7 +8,7 @@ import { DIV } from "../elements";
 
 const render =
     () => (
-        DIV({},
+        DIV({ className: 'dashboard' },
             user(),
             maps())
     );

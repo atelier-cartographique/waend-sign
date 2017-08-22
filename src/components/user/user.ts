@@ -31,7 +31,7 @@ const render =
                 BUTTON({ onClick: deleteUserKey(k), className: 'remove' }, "-"))
         });
         return (
-            DIV({},
+            DIV({ className: 'user' },
                 H1({}, queries.getUserName()),
                 DIV({}, ...kv),
                 addAttribute)

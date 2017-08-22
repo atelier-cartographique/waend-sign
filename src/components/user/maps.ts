@@ -1,9 +1,9 @@
 
 import queries from '../../queries/user';
-import { DIV, H1, A, UL, LI } from "../elements";
+import { DIV, H1, A, UL, LI, BUTTON } from "../elements";
 import { Group } from "waend-lib/defs";
 
-const addMap = DIV({}, A({ href: '/edit/new' }, "+ add map"));
+const addMap = BUTTON({ className: 'add' }, A({ href: '/edit/new' }, "+ add map"));
 
 const renderMapItem =
     (group: Group) => (
@@ -18,10 +18,10 @@ const render =
         const groups = queries.getMaps().map(renderMapItem);
 
         return (
-            DIV({},
+            DIV({ className: 'maps' },
                 H1({}, 'Maps'),
-                addMap,
                 UL({},
+                    addMap,
                     ...groups)));
     };
 
