@@ -43,7 +43,6 @@ const withApiUrl =
         const initialState: IShape = {
             ...appShape,
             'data/user': null,
-            'data/groups': [],
         };
         const start = source<IShape, keyof IShape>(['app/user']);
         const store = start(initialState);

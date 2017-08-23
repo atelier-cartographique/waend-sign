@@ -1,11 +1,12 @@
 
 
-import { User, Group } from 'waend-lib';
-import { LoginState, defaultLoginState } from '../components/login';
+import { User } from 'waend-lib';
+import { SignInState, defaultSignInState } from '../components/signin';
+import { SignUpState, defaultSignUpState } from '../components/signup';
 
 export type AppLayout =
-    | 'main'
-    | 'login'
+    | 'signin'
+    | 'signup'
     ;
 
 
@@ -18,7 +19,8 @@ export interface IShapeApp {
     'app/layout': AppLayout;
 
     // 'component/...': ...
-    'component/login': LoginState;
+    'component/signin': SignInState;
+    'component/signup': SignUpState;
 
     // 'port/...': ...
 }
@@ -26,7 +28,6 @@ export interface IShapeApp {
 
 export interface IShapeData {
     'data/user': User | null;
-    'data/groups': Group[];
 }
 
 export type IShape = IShapeApp & IShapeData;
@@ -34,8 +35,9 @@ export type IShape = IShapeApp & IShapeData;
 // Initial Application State 
 
 export const appShape: IShapeApp = {
-    'app/title': 'dashboard',
+    'app/title': 'sign',
     'app/user': null,
-    'app/layout': 'main',
-    'component/login': defaultLoginState(),
+    'app/layout': 'signin',
+    'component/signin': defaultSignInState(),
+    'component/signup': defaultSignUpState(),
 };

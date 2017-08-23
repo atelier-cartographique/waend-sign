@@ -6,20 +6,20 @@ import { IStoreInteractions } from './source';
 import { getBinder } from "waend-shell/defs";
 import events from './events/app';
 import queries from './queries/app';
-import user from './components/user';
-import login from './components/login';
+import signin from './components/signin';
+import signup from './components/signup';
 
 
 const logger = debug('waend:app');
 
 
-const renderLogin = () => login();
-const renderUser = () => user();
+const renderSignIn = () => signin();
+const renderSignUp = () => signup();
 
 const renderMain = (): React.DOMElement<{}, Element> => {
     switch (queries.getLayout()) {
-        case 'main': return renderUser();
-        case 'login': return renderLogin();
+        case 'signin': return renderSignIn();
+        case 'signup': return renderSignUp();
     }
 };
 
@@ -27,8 +27,7 @@ const MIN_FRAME_RATE = 16;
 
 export default (store: IStoreInteractions<IShape>) => {
 
-    let lastFrameRequest: number | null = null;
-    let version: number = -1;
+    let lastFrameRequest: number | null = null; let version: number = -1;
     let frameRate = MIN_FRAME_RATE;
     const root = document.createElement('div');
     document.body.appendChild(root);
@@ -76,7 +75,7 @@ export default (store: IStoreInteractions<IShape>) => {
                 events.setUser(user);
             })
             .catch(() => {
-                events.setLayout('login');
+                events.setLayout('signin');
             });
     };
 

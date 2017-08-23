@@ -1,2 +1,2 @@
-# waend-dashboard
-A Dashboard For Wænd
+# waend-sign
+A sign in & up app for Wænd
